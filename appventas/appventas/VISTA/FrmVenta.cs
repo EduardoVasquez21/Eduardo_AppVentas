@@ -1,4 +1,5 @@
-﻿using appventas.MODEL;
+﻿using appventas.DAO;
+using appventas.MODEL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,19 +31,35 @@ namespace appventas.VISTA
 
         private void FrmVenta_Load(object sender, EventArgs e)
         {
-            using (sistema_ventasEntities bd = new sistema_ventasEntities())
-            {
-                var consultacliente = bd.tb_cliente.ToList();
+            //using (sistema_ventasEntities bd = new sistema_ventasEntities())
+            //{
+            //    var consultacliente = bd.tb_cliente.ToList();
 
-                comboBox2.DataSource = consultacliente;
-                comboBox2.DisplayMember = "nombreCliente";
-                comboBox2.ValueMember = "iDCliente";
+            //    comboBox2.DataSource = consultacliente;
+            //    comboBox2.DisplayMember = "nombreCliente";
+            //    comboBox2.ValueMember = "iDCliente";
 
-                var consultadocumento = bd.tb_documento.ToList();
-                comboBox1.DataSource = consultadocumento;
-                comboBox1.DisplayMember = "nombreDocumento";
-                comboBox1.ValueMember = "iDDocumento";
-            }
+            //    var consultadocumento = bd.tb_documento.ToList();
+            //    comboBox1.DataSource = consultadocumento;
+            //    comboBox1.DisplayMember = "nombreDocumento";
+            //    comboBox1.ValueMember = "iDDocumento";
+            //}
+            ClsClientes clsclientes = new ClsClientes();
+
+            comboBox2.DataSource = clsclientes.cargarDatosClientes();
+            comboBox2.DisplayMember = "nombreCliente";
+            comboBox2.ValueMember = "iDCliente";
+
+            ClsDocs clsDocs = new ClsDocs();
+            comboBox1.DataSource = clsDocs.cargarDatosDoc();
+            comboBox1.DisplayMember = "nombreDocumento";
+            comboBox1.ValueMember = "iDDocumento";
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FrmFiltroProducto buscar = new FrmFiltroProducto();
+            buscar.Show();
         }
     }
 }

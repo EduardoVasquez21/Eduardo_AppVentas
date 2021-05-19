@@ -82,5 +82,19 @@ namespace appventas.DAO
             }
 
         }
+
+        //public List<tb_documento> CargarComboDoc()
+        //{
+        //    List<tb_documento> tb_Documentos = new List<tb_documento>();
+
+
+        //    using (sistema_ventasEntities db = new sistema_ventasEntities())
+        //    {
+        //        tb_Documentos = db.tb_documento.ToList();
+
+
+        //    }
+        //    return tb_Documentos;
+        //}
     }
 }
