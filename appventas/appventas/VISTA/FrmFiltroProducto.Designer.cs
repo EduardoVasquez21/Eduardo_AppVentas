@@ -62,6 +62,8 @@ namespace appventas.VISTA
             this.dtgFiltro.Size = new System.Drawing.Size(729, 206);
             this.dtgFiltro.TabIndex = 1;
             this.dtgFiltro.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgFiltro_CellClick);
+            this.dtgFiltro.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgFiltro_CellDoubleClick);
+            this.dtgFiltro.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dtgFiltro_KeyDown);
             // 
             // Column1
             // 

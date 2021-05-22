@@ -43,6 +43,12 @@ namespace appventas.VISTA
 
         private void dtgFiltro_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            
+
+        }
+
+        void envio()
+        {
             String id = dtgFiltro.CurrentRow.Cells[0].Value.ToString();
             String Nombre = dtgFiltro.CurrentRow.Cells[1].Value.ToString();
             String Precio = dtgFiltro.CurrentRow.Cells[2].Value.ToString();
@@ -56,10 +62,21 @@ namespace appventas.VISTA
             FrmMenuVenta.frmVenta.txtId.Text = id;
             FrmMenuVenta.frmVenta.txtNom.Text = Nombre;
             FrmMenuVenta.frmVenta.txtPrec.Text = Precio;
-
+            FrmMenuVenta.frmVenta.txtCant.Focus();
 
             this.Close();
+        }
 
+        private void dtgFiltro_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            envio();
+        }
+
+        private void dtgFiltro_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) {
+                envio();
+            }
         }
     }
 }
