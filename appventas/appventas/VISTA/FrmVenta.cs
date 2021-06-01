@@ -96,7 +96,7 @@ namespace appventas.VISTA
             catch (Exception ex)
             {
                 if (txtCant.Text.Equals("")) {
-                    txtCant.Text = "0";
+                    txtCant.Text = "1";
                     txtCant.SelectAll();
                 
                 }
@@ -126,14 +126,49 @@ namespace appventas.VISTA
                 txtCant.Clear();
                 txtTotal.Clear();
 
-                FrmMenuVenta.frmVenta.txtBus.Focus();
+                //FrmMenuVenta.frmVenta.txtBus.Focus();
             }
         }
 
-        private void txtBus_TextChanged(object sender, EventArgs e)
+        private void txtBus_KeyPress(object sender, KeyPressEventArgs e)
         {
-            btnBuscar.PerformClick();
+            if (e.KeyChar == 13)
+                if (txtBus.Text.Equals(""))
+                {
+                    btnBuscar.PerformClick();
+                    e.Handled = true;
+                    //txtCant.Focus();
 
+                }
+                else
+                {
+                    e.Handled = true;
+                    ClsProductos prod = new ClsProductos();
+                    var busqueda = prod.BuscarProducto(Convert.ToInt32(txtBus.Text));
+
+                    foreach (var iterar in busqueda)
+                    {
+
+                        txtId.Text = iterar.idProducto.ToString();
+                        txtNom.Text = iterar.nombreProducto;
+                        txtPrec.Text = iterar.precioProducto.ToString();
+                        txtCant.Text = "1";
+                        txtCant.Focus();
+                        txtBus.Text = "";
+
+                    }
+                }
+           
+        }
+
+        private void txtCant_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+            {
+                btnAgregar.PerformClick();
+                e.Handled = true;
+                txtBus.Focus();
+            }
         }
     }
 }

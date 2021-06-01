@@ -41,7 +41,6 @@ namespace appventas.VISTA
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txtBus = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.txtId = new System.Windows.Forms.TextBox();
@@ -57,6 +56,7 @@ namespace appventas.VISTA
             this.btnAgregar = new System.Windows.Forms.Button();
             this.txtTF = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.txtBus = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -160,14 +160,6 @@ namespace appventas.VISTA
             this.Column5.Name = "Column5";
             this.Column5.ReadOnly = true;
             // 
-            // txtBus
-            // 
-            this.txtBus.Location = new System.Drawing.Point(104, 148);
-            this.txtBus.Name = "txtBus";
-            this.txtBus.Size = new System.Drawing.Size(197, 20);
-            this.txtBus.TabIndex = 7;
-            this.txtBus.TextChanged += new System.EventHandler(this.txtBus_TextChanged);
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -218,6 +210,7 @@ namespace appventas.VISTA
             this.txtCant.Size = new System.Drawing.Size(143, 20);
             this.txtCant.TabIndex = 13;
             this.txtCant.TextChanged += new System.EventHandler(this.txtCant_TextChanged);
+            this.txtCant.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCant_KeyPress);
             // 
             // label5
             // 
@@ -299,13 +292,21 @@ namespace appventas.VISTA
             this.label10.TabIndex = 22;
             this.label10.Text = "Total Final";
             // 
+            // txtBus
+            // 
+            this.txtBus.Location = new System.Drawing.Point(104, 150);
+            this.txtBus.Name = "txtBus";
+            this.txtBus.Size = new System.Drawing.Size(197, 20);
+            this.txtBus.TabIndex = 23;
+            this.txtBus.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBus_KeyPress);
+            // 
             // FrmVenta
             // 
-            this.AcceptButton = this.btnAgregar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.ClientSize = new System.Drawing.Size(877, 512);
+            this.Controls.Add(this.txtBus);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.txtTF);
             this.Controls.Add(this.btnAgregar);
@@ -321,7 +322,6 @@ namespace appventas.VISTA
             this.Controls.Add(this.txtId);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.txtBus);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.comboBox2);
