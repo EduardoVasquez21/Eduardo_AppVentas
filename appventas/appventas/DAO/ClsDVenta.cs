@@ -21,5 +21,21 @@ namespace appventas.DAO
             return consultarultimaventa;
         }
 
+        public void save(tb_venta ventas)
+        {
+            using (sistema_ventasEntities bd = new sistema_ventasEntities())
+            {
+                tb_venta venta = new tb_venta();
+
+                venta.iDDocumento = ventas.iDDocumento;
+                venta.iDCliente = ventas.iDCliente;
+                venta.iDUsuario = ventas.iDUsuario;
+                venta.totalVenta = ventas.totalVenta;
+                venta.fecha = ventas.fecha;
+                bd.tb_venta.Add(venta);
+                bd.SaveChanges();
+            }
+        }
+
     }
 }

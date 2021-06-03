@@ -82,6 +82,10 @@ namespace appventas.VISTA
 
         private void txtCant_TextChanged(object sender, EventArgs e)
         {
+            calcular();
+        }
+        void calcular()
+        {
             try
             {
                 Double precio, cantidad, total;
@@ -95,16 +99,18 @@ namespace appventas.VISTA
             }
             catch (Exception ex)
             {
-                if (txtCant.Text.Equals("")) {
+                if (txtCant.Text.Equals(""))
+                {
                     txtCant.Text = "1";
                     txtCant.SelectAll();
-                
+
                 }
             }
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
+            calcular();
             dataGridView1.Rows.Add(txtId.Text,txtNom.Text,txtPrec.Text,txtCant.Text,txtTotal.Text);
 
             Double suma = 0;
@@ -124,10 +130,14 @@ namespace appventas.VISTA
                 txtNom.Clear();
                 txtPrec.Clear();
                 txtCant.Clear();
-                txtTotal.Clear();
-
-                //FrmMenuVenta.frmVenta.txtBus.Focus();
+                txtTotal.Clear();                
             }
+
+            dataGridView1.Refresh();
+            dataGridView1.ClearSelection();
+            int ultimafila = dataGridView1.Rows.Count - 1;
+            dataGridView1.FirstDisplayedScrollingRowIndex = ultimafila;
+            dataGridView1.Rows[ultimafila].Selected = true;
         }
 
         private void txtBus_KeyPress(object sender, KeyPressEventArgs e)
@@ -146,6 +156,12 @@ namespace appventas.VISTA
                     ClsProductos prod = new ClsProductos();
                     var busqueda = prod.BuscarProducto(Convert.ToInt32(txtBus.Text));
 
+                    if (busqueda.Count<1) {
+
+                        MessageBox.Show("No se ha encontrado coincidencias");
+                        txtBus.Text = "";
+                    
+                    }
                     foreach (var iterar in busqueda)
                     {
 
@@ -168,6 +184,28 @@ namespace appventas.VISTA
                 btnAgregar.PerformClick();
                 e.Handled = true;
                 txtBus.Focus();
+            }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            try {
+                ClsDVenta ventas = new ClsDVenta();
+                tb_venta venta = new tb_venta();
+
+                venta.iDDocumento = Convert.ToInt32
+                    (comboBox1.SelectedValue.ToString());
+                venta.iDCliente = Convert.ToInt32
+                    (comboBox2.SelectedValue.ToString());
+                venta.iDUsuario = 1;
+                venta.totalVenta = Convert.ToDecimal(txtTF.Text);
+                venta.fecha = Convert.ToDateTime(dateTimePicker1.Text);
+                ventas.save(venta);
+                MessageBox.Show("Save");
+            }
+            catch (Exception ex) {
+
+                MessageBox.Show("Error" + ex);
             }
         }
     }

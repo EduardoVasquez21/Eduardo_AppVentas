@@ -57,6 +57,8 @@ namespace appventas.VISTA
             this.txtTF = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.txtBus = new System.Windows.Forms.TextBox();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -300,12 +302,31 @@ namespace appventas.VISTA
             this.txtBus.TabIndex = 23;
             this.txtBus.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBus_KeyPress);
             // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(669, 18);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(197, 20);
+            this.dateTimePicker1.TabIndex = 24;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(805, 358);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(74, 37);
+            this.button1.TabIndex = 25;
+            this.button1.Text = "Guardar Venta";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // FrmVenta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.ClientSize = new System.Drawing.Size(877, 512);
+            this.ClientSize = new System.Drawing.Size(893, 512);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.txtBus);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.txtTF);
@@ -370,5 +391,7 @@ namespace appventas.VISTA
         private System.Windows.Forms.TextBox txtTF;
         private System.Windows.Forms.Label label10;
         public System.Windows.Forms.TextBox txtBus;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Button button1;
     }
 }
