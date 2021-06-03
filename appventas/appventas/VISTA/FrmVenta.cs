@@ -111,27 +111,14 @@ namespace appventas.VISTA
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             calcular();
+            calculartotal();
             dataGridView1.Rows.Add(txtId.Text,txtNom.Text,txtPrec.Text,txtCant.Text,txtTotal.Text);
 
-            Double suma = 0;
-
-            for (int i= 0; i<dataGridView1.Rows.Count; i++) {
-
-                //String Precio = dataGridView1.CurrentRow.Cells[2].Value.ToString();
-                String datosaoperartotal = dataGridView1.Rows[i].Cells[4].Value.ToString();
-
-                Double DatosConvertidos = Convert.ToDouble(datosaoperartotal);
-
-                suma += DatosConvertidos;
-
-                txtTF.Text = suma.ToString();
-
-                txtId.Clear();
-                txtNom.Clear();
-                txtPrec.Clear();
-                txtCant.Clear();
-                txtTotal.Clear();                
-            }
+            txtId.Clear();
+            txtNom.Clear();
+            txtPrec.Clear();
+            txtCant.Clear();
+            txtTotal.Clear();
 
             dataGridView1.Refresh();
             dataGridView1.ClearSelection();
@@ -176,6 +163,25 @@ namespace appventas.VISTA
                 }
            
         }
+        void calculartotal()
+        {
+            Double suma = 0;
+
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            {
+
+                //String Precio = dataGridView1.CurrentRow.Cells[2].Value.ToString();
+                String datosaoperartotal = dataGridView1.Rows[i].Cells[4].Value.ToString();
+
+                Double DatosConvertidos = Convert.ToDouble(datosaoperartotal);
+
+                suma += DatosConvertidos;
+
+                txtTF.Text = suma.ToString();
+
+
+            }
+        }
 
         private void txtCant_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -193,20 +199,44 @@ namespace appventas.VISTA
                 ClsDVenta ventas = new ClsDVenta();
                 tb_venta venta = new tb_venta();
 
-                venta.iDDocumento = Convert.ToInt32
-                    (comboBox1.SelectedValue.ToString());
-                venta.iDCliente = Convert.ToInt32
-                    (comboBox2.SelectedValue.ToString());
+                venta.iDDocumento = Convert.ToInt32(comboBox1.SelectedValue.ToString());
+                venta.iDCliente = Convert.ToInt32(comboBox2.SelectedValue.ToString());
                 venta.iDUsuario = 1;
                 venta.totalVenta = Convert.ToDecimal(txtTF.Text);
                 venta.fecha = Convert.ToDateTime(dateTimePicker1.Text);
                 ventas.save(venta);
+
+
+                ClsDDetalle detalle = new ClsDDetalle();
+                tb_detalleVenta tbdetalle = new tb_detalleVenta();
+
+                foreach (DataGridViewRow dtgv in dataGridView1.Rows)
+                {
+                    tbdetalle.iDVenta = Convert.ToInt32(txtNumPro.Text);
+                    tbdetalle.iDProducto = Convert.ToInt32(dtgv.Cells[0].Value.ToString());
+                    tbdetalle.cantidad = Convert.ToInt32(dtgv.Cells[3].Value.ToString());
+                    tbdetalle.precio = Convert.ToDecimal(dtgv.Cells[2].Value.ToString());
+                    tbdetalle.total = Convert.ToDecimal(dtgv.Cells[4].Value.ToString());
+
+                    detalle.guardardetalleventa(tbdetalle);
+                }
+
+                ultimocorrelativodeventa();
+                dataGridView1.Rows.Clear();
+                txtTF.Text = "";
+
+
                 MessageBox.Show("Save");
             }
             catch (Exception ex) {
 
                 MessageBox.Show("Error" + ex);
             }
+        }
+
+        private void dataGridView1_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            calculartotal();
         }
     }
 }
